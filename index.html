@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Rental PS - Dashboard</title>
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-gamepad"></i></div>
+                <div class="sidebar-brand-text mx-3">RENTAL PS <sup>ADMIN</sup></div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">Kelola Data</div>
+            <li class="nav-item ">
+                <a class="nav-link" href="mahasiswa.html"><i class="fas fa-fw fa-gamepad"></i><span>Master Unit PS</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="penilaian.html"><i class="fas fa-fw fa-receipt"></i><span>Transaksi Sewa</span></a>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"><i class="fa fa-bars"></i></button>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small font-weight-bold">Admin Rental PS</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                                <a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="container-fluid">
+                    <div id="alertBox"></div>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800 font-weight-bold">Dashboard Rental PlayStation</h1>
+                        <a href="penilaian.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> Tambah Transaksi Sewa
+                        </a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Unit PS</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="cardUnit">...</div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-gamepad fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Unit Tersedia</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="cardTersedia">...</div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-check-circle fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Transaksi</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="cardTrx">...</div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-receipt fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Pendapatan (Selesai)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="cardIncome">...</div>
+                                        </div>
+                                        <div class="col-auto"><i class="fas fa-money-bill-wave fa-2x text-gray-300"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-chart-bar mr-2"></i>Jumlah Transaksi per Status</h6></div>
+                                <div class="card-body"><div class="chart-bar"><canvas id="trxChart"></canvas></div></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-chart-pie mr-2"></i>Unit per Tipe Console</h6></div>
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2"><canvas id="tipeChart"></canvas></div>
+                                    <div class="mt-4 text-center small" id="tipeLegend"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto"><span>Rental PS &copy; Tugas Kuis 2026</span></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script>
+        const colors = ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'];
+
+        async function loadDashboard() {
+            let units = [], trx = [];
+            try { units = toList(await apiRequest('/unit/read.php')); } catch (e) { showAlert('Gagal memuat unit: ' + e.message, 'danger'); }
+            try { trx = toList(await apiRequest('/transaksi_sewa/read.php')); } catch (e) { showAlert('Gagal memuat transaksi: ' + e.message, 'danger'); }
+
+            // Kartu ringkasan
+            $('#cardUnit').text(units.length);
+            $('#cardTersedia').text(units.filter(u => u.status === 'Tersedia').length);
+            $('#cardTrx').text(trx.length);
+            const income = trx.filter(t => t.status_transaksi === 'Selesai')
+                              .reduce((s, t) => s + (Number(t.total_harga ?? t.total_bayar ?? t.total) || 0), 0);
+            $('#cardIncome').text(rupiah(income));
+
+            // Chart transaksi per status
+            const statusCount = {};
+            trx.forEach(t => { const s = t.status_transaksi || 'Lainnya'; statusCount[s] = (statusCount[s] || 0) + 1; });
+            new Chart(document.getElementById('trxChart'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(statusCount),
+                    datasets: [{ label: 'Jumlah Transaksi', backgroundColor: '#4e73df', data: Object.values(statusCount) }]
+                },
+                options: { maintainAspectRatio: false, legend: { display: false },
+                           scales: { yAxes: [{ ticks: { beginAtZero: true, precision: 0 } }] } }
+            });
+
+            // Chart unit per tipe
+            const tipeCount = {};
+            units.forEach(u => { const k = u.tipe_ps || 'Lainnya'; tipeCount[k] = (tipeCount[k] || 0) + 1; });
+            const labels = Object.keys(tipeCount);
+            new Chart(document.getElementById('tipeChart'), {
+                type: 'doughnut',
+                data: { labels: labels, datasets: [{ data: Object.values(tipeCount), backgroundColor: colors }] },
+                options: { maintainAspectRatio: false, legend: { display: false }, cutoutPercentage: 70 }
+            });
+            $('#tipeLegend').html(labels.map((l, i) =>
+                `<span class="mr-2"><i class="fas fa-circle" style="color:${colors[i % colors.length]}"></i> ${esc(l)}</span>`).join(''));
+        }
+
+        $(document).ready(loadDashboard);
+    </script>
+
+</body>
+
+</html>
